@@ -1,0 +1,14 @@
+langchain
+langchain-core
+
+langchain-xai
+langchain-openai
+dotenv
+
+langchain-huggingface
+pygithub
+streamlit
+GitPython
+
+
+
