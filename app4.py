@@ -237,9 +237,43 @@ if st.session_state.repo_summary:
 if st.session_state.plan:
     st.subheader("💻 Code Generation")
     st.info("Generate actual code changes based on the implementation plan above.")
-    if st.button("Generate Code"):
-        coder_agent()
 
+    # Placeholder for animation + progress
+    placeholder = st.empty()
+
+    if st.button("🤖 Generate Code"):
+        # Create a container for our animation and progress
+        with placeholder.container():
+            st.markdown("### 🤖 Your Coding Agent is at work... Please wait!")
+            progress_text = st.empty()
+            animation_spot = st.empty()
+            progress_bar = st.progress(0)
+
+            # A simple looping emoji animation (robot typing)
+            emojis = ["🤖", "💻", "⌨️", "🧠", "⚙️", "🚀"]
+            cycle = itertools.cycle(emojis)
+
+            # Run your long process while showing animation
+            for i in range(100):
+                progress_bar.progress(i + 1)
+                progress_text.markdown(f"**Generating code... {i+1}%**")
+                animation_spot.markdown(
+                    f"<h1 style='text-align:center; font-size:60px;'>{next(cycle)}</h1>",
+                    unsafe_allow_html=True,
+                )
+                time.sleep(0.05)  # Adjust speed of animation
+
+            # Once done, clear placeholders
+            progress_text.empty()
+            animation_spot.empty()
+            progress_bar.empty()
+
+            # Call your agent here
+            coder_agent()
+
+        placeholder.empty()  # remove animation container once done
+
+    # Display generated code
     if st.session_state.code_output:
         st.subheader("📝 Generated Code Snippets")
         st.code(st.session_state.code_output, language="python")
